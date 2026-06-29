@@ -46,8 +46,8 @@ export async function POST(request: Request) {
       equipment_needed: body.equipment_needed || [],
       notes: body.notes || "",
     });
-  } catch {
-    // Email failure shouldn't block the booking
+  } catch (emailError) {
+    console.error("Email notification failed:", emailError);
   }
 
   return NextResponse.json({ reference, id: data.id });
