@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { MapPin, Building2 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -14,8 +15,19 @@ export function SupplierCard({ supplier }: SupplierCardProps) {
   return (
     <Link href={`/suppliers/${supplier.slug}`}>
       <Card hover className="h-full">
-        <div className="aspect-[16/9] bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center">
-          <Building2 size={48} className="text-accent/30" />
+        <div className="aspect-[16/9] bg-gradient-to-br from-accent/10 to-accent/5 flex items-center justify-center p-6">
+          {supplier.logo_url ? (
+            <Image
+              src={supplier.logo_url}
+              alt={`${supplier.name} logo`}
+              width={200}
+              height={100}
+              className="object-contain max-h-20"
+              unoptimized
+            />
+          ) : (
+            <Building2 size={48} className="text-accent/30" />
+          )}
         </div>
 
         <div className="p-5">

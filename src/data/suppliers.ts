@@ -4,7 +4,7 @@ export const suppliers: Supplier[] = [
   {
     id: "1", name: "Urbantonic", slug: "urbantonic",
     description: "One of Cape Town's largest full-service event hire companies with 25+ years experience. Furniture, decor, marquees, crockery, staffing, and bar services for corporate events, weddings, and festivals.",
-    logo_url: "", cover_image_url: "", area: "Cape Town CBD", city: "Cape Town",
+    logo_url: "https://urbantonic.co.za/wp-content/uploads/2025/09/Urbantonic-Full-Logo-White.webp", cover_image_url: "", area: "Cape Town CBD", city: "Cape Town",
     phone: "", email: "", website: "https://urbantonic.co.za/",
     years_in_business: 25, rating: 4.7, review_count: 34, price_range: "RR",
     categories: ["Furniture Hire", "Decor & Styling", "Marquee & Tent Hire", "Linen & Tableware"],
@@ -13,7 +13,7 @@ export const suppliers: Supplier[] = [
   {
     id: "2", name: "ABC Hire", slug: "abc-hire",
     description: "Furniture, decor, crockery, cutlery, glassware, dance floors, and LED furniture hire covering Cape Town, Stellenbosch, Paarl, and Somerset West.",
-    logo_url: "", cover_image_url: "", area: "Stellenbosch", city: "Cape Town",
+    logo_url: "https://www.abchire.co.za/wp-content/uploads/2024/11/cropped-abc-hire-cape-town-logo.png", cover_image_url: "", area: "Stellenbosch", city: "Cape Town",
     phone: "", email: "", website: "https://www.abchire.co.za/",
     years_in_business: 15, rating: 4.5, review_count: 28, price_range: "RR",
     categories: ["Furniture Hire", "Decor & Styling", "Linen & Tableware", "Dance Floors & Entertainment"],
@@ -22,7 +22,7 @@ export const suppliers: Supplier[] = [
   {
     id: "3", name: "Banks R&L Hiring", slug: "banks-rl-hiring",
     description: "Marquees, furniture, crockery, cutlery, catering equipment, and linen hire since 1999. Based in Paarden Eiland, Cape Town.",
-    logo_url: "", cover_image_url: "", area: "Paarden Eiland", city: "Cape Town",
+    logo_url: "https://www.banksrl.co.za/wp-content/uploads/2024/04/logo.jpg", cover_image_url: "", area: "Paarden Eiland", city: "Cape Town",
     phone: "", email: "", website: "https://banksrl.co.za/",
     years_in_business: 27, rating: 4.4, review_count: 19, price_range: "R",
     categories: ["Marquee & Tent Hire", "Furniture Hire", "Linen & Tableware", "Catering Equipment"],
@@ -40,7 +40,7 @@ export const suppliers: Supplier[] = [
   {
     id: "5", name: "Special Events Hiring & Logistics", slug: "special-events",
     description: "Furniture, decor, tableware, and logistics for corporate planners and event coordinators across Cape Town.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://static.wixstatic.com/media/1f03d5_000c5f683e8347b59f14f08164bf631e~mv2.png/v1/fill/w_295,h_190,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Vect%20SE.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://www.specialevents.co.za/",
     years_in_business: 12, rating: 4.3, review_count: 15, price_range: "RR",
     categories: ["Furniture Hire", "Decor & Styling", "Linen & Tableware"],
@@ -58,7 +58,7 @@ export const suppliers: Supplier[] = [
   {
     id: "7", name: "eHire (Ignite Events)", slug: "ehire",
     description: "Online event equipment shop — crockery, catering equipment, bar equipment, outdoor heaters, and shade solutions. Western Cape.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://ehire.co.za/wp-content/uploads/2024/02/ae03af1e-79d1-42a1-ad79-a26dcd1928f3-1400x700.jpg", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://ehire.co.za/",
     years_in_business: 10, rating: 4.2, review_count: 12, price_range: "R",
     categories: ["Catering Equipment", "Linen & Tableware", "Furniture Hire"],
@@ -67,7 +67,7 @@ export const suppliers: Supplier[] = [
   {
     id: "8", name: "Macstyle Hire", slug: "macstyle-hire",
     description: "Furniture, decor, and linen hire for weddings and corporate events in Cape Town.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://macstylehire.co.za/wp-content/uploads/2025/02/Untitled-design-e1738621202391.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://macstylehire.co.za/",
     years_in_business: 10, rating: 3.8, review_count: 8, price_range: "RR",
     categories: ["Furniture Hire", "Decor & Styling", "Linen & Tableware"],
@@ -76,7 +76,7 @@ export const suppliers: Supplier[] = [
   {
     id: "9", name: "Cape Marquee", slug: "cape-marquee",
     description: "Premium marquees and Bedouin tents for events across Cape Town. Specialist in high-end outdoor event infrastructure.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://capemarquee.co.za/wp-content/uploads/2020/04/logo-web.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "073 022 8496", email: "", website: "https://capemarquee.co.za/",
     years_in_business: 15, rating: 4.8, review_count: 42, price_range: "RRR",
     categories: ["Marquee & Tent Hire", "Decor & Styling"],
@@ -112,7 +112,7 @@ export const suppliers: Supplier[] = [
   {
     id: "13", name: "Cozi Hire", slug: "cozi-hire",
     description: "Tents, gazebos, marquees, Bedouin tents, peg & pole, and aluminium frame tent hire in Cape Town.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://www.cozi.co.za/wp-content/uploads/2013/12/logo-cozi.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://www.cozi.co.za/",
     years_in_business: 10, rating: 4.2, review_count: 11, price_range: "R",
     categories: ["Marquee & Tent Hire"],
@@ -121,7 +121,7 @@ export const suppliers: Supplier[] = [
   {
     id: "14", name: "Muse Decor Hire", slug: "muse-decor-hire",
     description: "Lighting, decor items, cherry blossom trees, cutlery, crockery, linen, and draping hire. Stikland/Bellville and Vredenburg.",
-    logo_url: "", cover_image_url: "", area: "Bellville", city: "Cape Town",
+    logo_url: "http://musedecorhire.co.za/uploads/musedecorhirelogo-1.png", cover_image_url: "", area: "Bellville", city: "Cape Town",
     phone: "", email: "", website: "http://musedecorhire.co.za/",
     years_in_business: 8, rating: 4.5, review_count: 20, price_range: "RR",
     categories: ["Decor & Styling", "Staging & Lighting", "Linen & Tableware"],
@@ -130,7 +130,7 @@ export const suppliers: Supplier[] = [
   {
     id: "15", name: "Something Borrowed", slug: "something-borrowed",
     description: "Decor, table linen, and props hire for events in Cape Town. Curated collection with transparent pricing.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://something-borrowed.co.za/wp-content/uploads/2023/05/cropped-SB-final-files-BlackArtboard-4-100-1-207x111.jpg", cover_image_url: "https://something-borrowed.co.za/wp-content/uploads/2023/05/SB-final-files-BlackArtboard-5@3x-1024x840.png", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://something-borrowed.co.za/",
     years_in_business: 7, rating: 4.7, review_count: 25, price_range: "RR",
     categories: ["Decor & Styling", "Linen & Tableware"],
@@ -139,7 +139,7 @@ export const suppliers: Supplier[] = [
   {
     id: "16", name: "Palm Event Hire", slug: "palm-event-hire",
     description: "Premium lounge, cocktail, and bespoke furniture hire for high-end corporate events in Cape Town.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://static.wixstatic.com/media/0fdef751204647a3bbd7eaa2827ed4f9.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://www.palmeventhire.com/",
     years_in_business: 10, rating: 4.8, review_count: 35, price_range: "RRR",
     categories: ["Furniture Hire"],
@@ -166,7 +166,7 @@ export const suppliers: Supplier[] = [
   {
     id: "19", name: "Curated (The Napery)", slug: "curated-napery",
     description: "Luxury tablecloths, napkins, runners, and overlays for premium events in Cape Town.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://curatedevent.co.za/wp-content/uploads/2023/02/Curated-Logo.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://curatedevent.co.za/",
     years_in_business: 10, rating: 4.9, review_count: 28, price_range: "RRR",
     categories: ["Linen & Tableware"],
@@ -175,7 +175,7 @@ export const suppliers: Supplier[] = [
   {
     id: "20", name: "Event Staging", slug: "event-staging",
     description: "Lighting rigs, stages, AV equipment hire for corporate conferences and events in Cape Town.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://www.eventstaging.co.za/sites/default/files/CorporateEventStaging.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://www.eventstaging.co.za/",
     years_in_business: 15, rating: 4.5, review_count: 22, price_range: "RR",
     categories: ["Staging & Lighting", "Sound & AV"],
@@ -211,7 +211,7 @@ export const suppliers: Supplier[] = [
   {
     id: "24", name: "AV Direct", slug: "av-direct",
     description: "Award-winning stage lighting and AV equipment hire for corporate events in Cape Town.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://www.avdirect.co.za/wp-content/uploads/av-direct-logo-1.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://www.avdirect.co.za/",
     years_in_business: 15, rating: 4.7, review_count: 30, price_range: "RRR",
     categories: ["Sound & AV", "Staging & Lighting"],
@@ -238,7 +238,7 @@ export const suppliers: Supplier[] = [
   {
     id: "27", name: "Next Dimension Entertainment", slug: "next-dimension",
     description: "LED dance floors, white/starlit dance floors, event furniture, and flooring hire. Starlit floor from R4,500.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://www.nextdimensionevents.co.za/brand-icon.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://nextdimension.capetown/",
     years_in_business: 8, rating: 4.6, review_count: 19, price_range: "RR",
     categories: ["Dance Floors & Entertainment", "Furniture Hire"],
@@ -247,7 +247,7 @@ export const suppliers: Supplier[] = [
   {
     id: "28", name: "Gold Otter Media", slug: "gold-otter",
     description: "Photo booths and 360 booths hire from R9,550. Cape Town event entertainment specialists.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://goldotter.co.za/wp-content/uploads/2026/04/GoldOtterMedia_1_white_transparent.webp", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://goldotter.co.za/",
     years_in_business: 5, rating: 4.8, review_count: 21, price_range: "RR",
     categories: ["Dance Floors & Entertainment"],
@@ -256,7 +256,7 @@ export const suppliers: Supplier[] = [
   {
     id: "29", name: "Red Hot Events", slug: "red-hot-events",
     description: "Sofas, armchairs, ottomans, tables, and event accessories hire from warehouse in Cape Town.",
-    logo_url: "", cover_image_url: "", area: "Cape Town", city: "Cape Town",
+    logo_url: "https://www.redhotevents.co.za/wp-content/uploads/2016/08/redhot-logo-1-1-1.png", cover_image_url: "", area: "Cape Town", city: "Cape Town",
     phone: "", email: "", website: "https://www.redhotevents.co.za/",
     years_in_business: 12, rating: 4.3, review_count: 16, price_range: "RR",
     categories: ["Furniture Hire"],

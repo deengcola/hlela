@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import {
   MapPin,
   Phone,
@@ -51,8 +52,19 @@ export default async function SupplierPage({ params }: PageProps) {
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-8">
           {/* Hero */}
-          <div className="aspect-[16/9] bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl flex items-center justify-center">
-            <Building2 size={80} className="text-accent/20" />
+          <div className="aspect-[16/9] bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl flex items-center justify-center p-8">
+            {supplier.logo_url ? (
+              <Image
+                src={supplier.logo_url}
+                alt={`${supplier.name} logo`}
+                width={400}
+                height={200}
+                className="object-contain max-h-32"
+                unoptimized
+              />
+            ) : (
+              <Building2 size={80} className="text-accent/20" />
+            )}
           </div>
 
           {/* Info */}
