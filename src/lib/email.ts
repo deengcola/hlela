@@ -24,7 +24,7 @@ export async function sendBookingNotification(booking: BookingNotification) {
 
   await resend.emails.send({
     from: "Hlela Bookings <onboarding@resend.dev>",
-    to: ["info@hlela.co.za"],
+    to: ["capitalvest@gmail.com", "info@hlela.co.za"],
     subject: `New Booking Request: ${booking.supplier_name} — ${booking.reference}`,
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
