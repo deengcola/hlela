@@ -3,18 +3,19 @@
 import { useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle } from "lucide-react";
+import { ArrowLeft, CheckCircle, Loader2 } from "lucide-react";
 import { suppliers } from "@/data/suppliers";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { EVENT_TYPES } from "@/lib/types";
-import { generateReference } from "@/lib/utils";
 
 export default function BookingPage() {
   const { slug } = useParams<{ slug: string }>();
   const supplier = suppliers.find((s) => s.slug === slug);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [reference, setReference] = useState("");
+  const [error, setError] = useState("");
 
   if (!supplier) {
     return (
@@ -27,12 +28,55 @@ export default function BookingPage() {
     );
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const ref = generateReference();
-    setReference(ref);
-    setSubmitted(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setSubmitting(true);
+    setError("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const equipmentCheckboxes = form.querySelectorAll<HTMLInputElement>(
+      'input[name="equipment"]:checked'
+    );
+    const equipment = Array.from(equipmentCheckboxes).map((cb) => cb.value);
+
+    const payload = {
+      supplier_slug: supplier.slug,
+      supplier_name: supplier.name,
+      contact_name: formData.get("contact_name") as string,
+      contact_email: formData.get("contact_email") as string,
+      contact_phone: formData.get("contact_phone") as string,
+      event_date: formData.get("event_date") as string,
+      event_type: formData.get("event_type") as string,
+      guest_count: parseInt(formData.get("guest_count") as string, 10),
+      venue_location: formData.get("venue_location") as string,
+      equipment_needed: equipment,
+      notes: formData.get("notes") as string,
+    };
+
+    try {
+      const res = await fetch("/api/booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error || "Something went wrong. Please try again.");
+        setSubmitting(false);
+        return;
+      }
+
+      setReference(data.reference);
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch {
+      setError("Network error. Please check your connection and try again.");
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -87,24 +131,33 @@ export default function BookingPage() {
         </p>
       </div>
 
+      {error && (
+        <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
+          {error}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="bg-card rounded-2xl border border-border p-6 space-y-5">
           <h2 className="font-semibold text-foreground">Your Details</h2>
           <Input
-            id="name"
+            id="contact_name"
+            name="contact_name"
             label="Full Name"
             placeholder="Your full name"
             required
           />
           <Input
-            id="email"
+            id="contact_email"
+            name="contact_email"
             label="Email"
             type="email"
             placeholder="you@company.co.za"
             required
           />
           <Input
-            id="phone"
+            id="contact_phone"
+            name="contact_phone"
             label="Phone"
             type="tel"
             placeholder="082 000 0000"
@@ -116,7 +169,8 @@ export default function BookingPage() {
           <h2 className="font-semibold text-foreground">Event Details</h2>
 
           <Input
-            id="date"
+            id="event_date"
+            name="event_date"
             label="Event Date"
             type="date"
             required
@@ -124,13 +178,14 @@ export default function BookingPage() {
 
           <div>
             <label
-              htmlFor="event-type"
+              htmlFor="event_type"
               className="block text-sm font-medium text-foreground mb-2"
             >
               Event Type
             </label>
             <select
-              id="event-type"
+              id="event_type"
+              name="event_type"
               required
               className="w-full px-4 py-3 rounded-xl border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent"
             >
@@ -144,7 +199,8 @@ export default function BookingPage() {
           </div>
 
           <Input
-            id="guests"
+            id="guest_count"
+            name="guest_count"
             label="Estimated Guests"
             type="number"
             placeholder="e.g. 150"
@@ -153,7 +209,8 @@ export default function BookingPage() {
           />
 
           <Input
-            id="venue"
+            id="venue_location"
+            name="venue_location"
             label="Venue / Location"
             placeholder="e.g. CTICC, Cape Town"
             required
@@ -191,6 +248,7 @@ export default function BookingPage() {
             </label>
             <textarea
               id="notes"
+              name="notes"
               rows={4}
               placeholder="Describe what you need, any specific requirements, setup/collection times..."
               className="w-full px-4 py-3 rounded-xl border border-border bg-card text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent resize-none"
@@ -198,8 +256,15 @@ export default function BookingPage() {
           </div>
         </div>
 
-        <Button type="submit" size="lg" className="w-full">
-          Send Booking Request
+        <Button type="submit" size="lg" className="w-full" disabled={submitting}>
+          {submitting ? (
+            <>
+              <Loader2 size={20} className="animate-spin mr-2" />
+              Sending...
+            </>
+          ) : (
+            "Send Booking Request"
+          )}
         </Button>
 
         <p className="text-xs text-muted text-center">
