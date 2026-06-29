@@ -23,7 +23,7 @@ export async function sendBookingNotification(booking: BookingNotification) {
     : "Not specified";
 
   await resend.emails.send({
-    from: "Hlela Bookings <bookings@updates.hlela.co.za>",
+    from: "Hlela Bookings <onboarding@resend.dev>",
     to: ["info@hlela.co.za"],
     subject: `New Booking Request: ${booking.supplier_name} — ${booking.reference}`,
     html: `
