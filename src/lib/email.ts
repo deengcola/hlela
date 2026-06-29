@@ -17,12 +17,12 @@ interface BookingNotification {
   notes: string;
 }
 
-export async function sendBookingNotification(booking: BookingNotification) {
+export async function sendBookingNotification(booking: BookingNotification): Promise<{ data: unknown; error: unknown }> {
   const equipmentList = booking.equipment_needed.length
     ? booking.equipment_needed.join(", ")
     : "Not specified";
 
-  await resend.emails.send({
+  const { data, error } = await resend.emails.send({
     from: "Hlela Bookings <onboarding@resend.dev>",
     to: ["capitalvest@gmail.com", "info@hlela.co.za"],
     subject: `New Booking Request: ${booking.supplier_name} — ${booking.reference}`,
@@ -70,4 +70,5 @@ export async function sendBookingNotification(booking: BookingNotification) {
       </div>
     `,
   });
+  return { data, error };
 }
