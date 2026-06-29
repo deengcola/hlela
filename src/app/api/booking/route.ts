@@ -31,10 +31,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }
 
-  let emailStatus = "sent";
-  let emailError = null;
   try {
-    const emailResult = await sendBookingNotification({
+    await sendBookingNotification({
       reference,
       supplier_name: body.supplier_name,
       supplier_slug: body.supplier_slug,
@@ -48,11 +46,9 @@ export async function POST(request: Request) {
       equipment_needed: body.equipment_needed || [],
       notes: body.notes || "",
     });
-    emailError = emailResult;
   } catch (err) {
-    emailStatus = "failed";
-    emailError = String(err);
+    console.error("Email notification failed:", err);
   }
 
-  return NextResponse.json({ reference, id: data.id, emailStatus, emailError });
+  return NextResponse.json({ reference, id: data.id });
 }
