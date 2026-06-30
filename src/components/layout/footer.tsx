@@ -7,12 +7,12 @@ const FOOTER_LINKS = {
     { label: "How It Works", href: "/about" },
   ],
   "For Suppliers": [
-    { label: "List Your Business", href: "/about" },
-    { label: "Pricing", href: "/about" },
+    { label: "List Your Business", href: "/list-your-business" },
+    { label: "Pricing", href: "/pricing" },
   ],
   Company: [
     { label: "About Hlela", href: "/about" },
-    { label: "Contact", href: "/about" },
+    { label: "Contact", href: "/contact" },
   ],
 };
 

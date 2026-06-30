@@ -36,9 +36,11 @@ export function Header() {
           </nav>
 
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="outline" size="sm">
-              List Your Business
-            </Button>
+            <Link href="/list-your-business">
+              <Button variant="outline" size="sm">
+                List Your Business
+              </Button>
+            </Link>
           </div>
 
           <button
@@ -68,9 +70,11 @@ export function Header() {
               </Link>
             ))}
             <div className="pt-2">
-              <Button variant="outline" size="sm" className="w-full">
-                List Your Business
-              </Button>
+              <Link href="/list-your-business" onClick={() => setMobileOpen(false)}>
+                <Button variant="outline" size="sm" className="w-full">
+                  List Your Business
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
