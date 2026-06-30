@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Browse Suppliers",
   description: "Compare Cape Town's top event hire companies — pricing, reviews, availability — in one place.",
+  alternates: {
+    canonical: "/search",
+  },
 };
 
 export default function SearchPage() {

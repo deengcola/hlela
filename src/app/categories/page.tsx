@@ -9,6 +9,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Categories",
   description: "Browse event hire categories — marquees, furniture, decor, lighting, sound, generators, and more.",
+  alternates: {
+    canonical: "/categories",
+  },
 };
 
 const ICON_MAP: Record<string, React.ElementType> = {

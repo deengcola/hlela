@@ -27,9 +27,19 @@ export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
   const supplier = suppliers.find((s) => s.slug === slug);
   if (!supplier) return {};
+  const title = `${supplier.name} — ${supplier.categories[0]} in ${supplier.area}, Cape Town`;
   return {
-    title: `${supplier.name} — Event Hire`,
+    title,
     description: supplier.description,
+    alternates: {
+      canonical: `/suppliers/${supplier.slug}`,
+    },
+    openGraph: {
+      title,
+      description: supplier.description,
+      type: "website",
+      url: `https://www.hlela.co.za/suppliers/${supplier.slug}`,
+    },
   };
 }
 
@@ -38,8 +48,39 @@ export default async function SupplierPage({ params }: PageProps) {
   const supplier = suppliers.find((s) => s.slug === slug);
   if (!supplier) notFound();
 
+  const businessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: supplier.name,
+    description: supplier.description,
+    url: `https://www.hlela.co.za/suppliers/${supplier.slug}`,
+    telephone: supplier.phone || undefined,
+    email: supplier.email || undefined,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: supplier.area,
+      addressRegion: "Western Cape",
+      addressCountry: "ZA",
+    },
+    areaServed: {
+      "@type": "City",
+      name: supplier.city,
+    },
+    aggregateRating: supplier.review_count > 0 ? {
+      "@type": "AggregateRating",
+      ratingValue: supplier.rating,
+      reviewCount: supplier.review_count,
+    } : undefined,
+    priceRange: supplier.price_range,
+    knowsAbout: supplier.categories,
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(businessJsonLd) }}
+      />
       <Link
         href="/search"
         className="inline-flex items-center gap-1.5 text-sm text-muted hover:text-foreground transition-colors mb-6"

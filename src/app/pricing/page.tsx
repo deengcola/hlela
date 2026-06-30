@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Pricing",
   description: "Hlela is free to browse and free to list. Suppliers pay a small commission only when a booking is confirmed.",
+  alternates: {
+    canonical: "/pricing",
+  },
 };
 
 const PLANS = [
