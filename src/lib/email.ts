@@ -132,6 +132,54 @@ export async function sendSupplierApplicationNotification(
   return { data, error };
 }
 
+interface CommissionInvoice {
+  reference: string;
+  supplier_name: string;
+  supplier_email: string;
+  deal_value: number;
+  commission_amount: number;
+}
+
+export async function sendCommissionInvoice(
+  invoice: CommissionInvoice
+): Promise<{ data: unknown; error: unknown }> {
+  const { data, error } = await getResend().emails.send({
+    from: "Hlela Billing <bookings@hlela.co.za>",
+    to: [invoice.supplier_email, "info@hlela.co.za"],
+    subject: `Hlela Commission Invoice — ${invoice.reference}`,
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
+        <div style="background: #0d9488; padding: 24px 32px; border-radius: 12px 12px 0 0;">
+          <h1 style="color: white; margin: 0; font-size: 20px;">Commission Invoice</h1>
+          <p style="color: rgba(255,255,255,0.8); margin: 4px 0 0; font-size: 14px;">Reference: ${invoice.reference}</p>
+        </div>
+
+        <div style="border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px; padding: 32px;">
+          <p style="margin: 0 0 24px; font-size: 14px; line-height: 1.6;">Hi ${invoice.supplier_name},</p>
+          <p style="margin: 0 0 24px; font-size: 14px; line-height: 1.6;">Congratulations on confirming this booking through Hlela. Here's a summary of the commission owed.</p>
+
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+            <tr><td style="padding: 8px 0; color: #6b7280;">Confirmed booking value</td><td style="padding: 8px 0; text-align: right; font-weight: 500;">R${invoice.deal_value.toLocaleString("en-ZA")}</td></tr>
+            <tr><td style="padding: 8px 0; color: #6b7280;">Hlela commission (15%)</td><td style="padding: 8px 0; text-align: right; font-weight: 600; color: #0d9488;">R${invoice.commission_amount.toLocaleString("en-ZA")}</td></tr>
+          </table>
+
+          <p style="margin: 0 0 24px; font-size: 14px; line-height: 1.6;">Please arrange payment via EFT to the banking details below within 7 days.</p>
+
+          <div style="padding: 16px; background: #f9fafb; border-radius: 8px; font-size: 14px; line-height: 1.8;">
+            <strong>Banking details to follow separately.</strong>
+          </div>
+        </div>
+
+        <p style="text-align: center; color: #9ca3af; font-size: 12px; margin-top: 24px;">
+          Hlela — South Africa's first event hire marketplace<br>
+          www.hlela.co.za
+        </p>
+      </div>
+    `,
+  });
+  return { data, error };
+}
+
 interface ContactMessage {
   name: string;
   email: string;

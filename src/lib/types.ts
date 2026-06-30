@@ -63,6 +63,11 @@ export interface BookingRequest {
   notes: string;
   status: "pending" | "quoted" | "confirmed" | "declined";
   created_at: string;
+  deal_value?: number | null;
+  commission_amount?: number | null;
+  commission_status?: "not_applicable" | "pending_invoice" | "invoiced" | "paid";
+  admin_notes?: string;
+  confirmed_at?: string | null;
 }
 
 export interface Category {
