@@ -8,11 +8,10 @@ import {
   Globe,
   ArrowLeft,
   Building2,
-  Instagram,
-  Facebook,
   Lock,
   Grid3X3,
   Star,
+  ExternalLink,
 } from "lucide-react";
 import { suppliers } from "@/data/suppliers";
 import { Badge } from "@/components/ui/badge";
@@ -219,13 +218,15 @@ export default async function SupplierPage({ params }: PageProps) {
             </a>
           )}
           {supplier.instagram_url && (
-            <a href={supplier.instagram_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-muted hover:text-foreground">
-              <Instagram size={14} />
+            <a href={supplier.instagram_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-muted hover:text-foreground text-xs">
+              <ExternalLink size={14} />
+              Instagram
             </a>
           )}
           {supplier.facebook_url && (
-            <a href={supplier.facebook_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-muted hover:text-foreground">
-              <Facebook size={14} />
+            <a href={supplier.facebook_url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-muted hover:text-foreground text-xs">
+              <ExternalLink size={14} />
+              Facebook
             </a>
           )}
         </div>
