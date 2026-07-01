@@ -26,7 +26,7 @@ export async function sendBookingNotification(booking: BookingNotification): Pro
 
   const { data, error } = await getResend().emails.send({
     from: "Hlela Bookings <bookings@hlela.co.za>",
-    to: ["info@hlela.co.za", "capitalvest@gmail.com"],
+    to: ["info@hlela.co.za"],
     subject: `New Booking Request: ${booking.supplier_name} — ${booking.reference}`,
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
@@ -96,7 +96,7 @@ export async function sendSupplierApplicationNotification(
 
   const { data, error } = await getResend().emails.send({
     from: "Hlela Applications <bookings@hlela.co.za>",
-    to: ["info@hlela.co.za", "capitalvest@gmail.com"],
+    to: ["info@hlela.co.za"],
     subject: `New Supplier Application: ${application.company_name}`,
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
@@ -202,7 +202,7 @@ export async function sendEventBriefNotification(
 
   const { data, error } = await getResend().emails.send({
     from: "Hlela Briefs <bookings@hlela.co.za>",
-    to: ["info@hlela.co.za", "capitalvest@gmail.com"],
+    to: ["info@hlela.co.za"],
     subject: `New Event Brief: ${brief.event_type} — ${brief.contact_name}${brief.company ? ` (${brief.company})` : ""}`,
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
@@ -260,7 +260,7 @@ export async function sendContactNotification(
 ): Promise<{ data: unknown; error: unknown }> {
   const { data, error } = await getResend().emails.send({
     from: "Hlela Contact <bookings@hlela.co.za>",
-    to: ["info@hlela.co.za", "capitalvest@gmail.com"],
+    to: ["info@hlela.co.za"],
     subject: `Contact Form: ${contact.subject}`,
     html: `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
