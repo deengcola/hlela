@@ -180,6 +180,74 @@ export async function sendCommissionInvoice(
   return { data, error };
 }
 
+interface EventBriefNotification {
+  reference: string;
+  contact_name: string;
+  contact_email: string;
+  contact_phone: string;
+  company: string;
+  event_type: string;
+  event_date: string;
+  guest_range: string;
+  venue: string;
+  budget_range: string;
+  equipment: string[];
+  additional_notes: string;
+}
+
+export async function sendEventBriefNotification(
+  brief: EventBriefNotification
+): Promise<{ data: unknown; error: unknown }> {
+  const equipmentList = brief.equipment.join(", ");
+
+  const { data, error } = await getResend().emails.send({
+    from: "Hlela Briefs <bookings@hlela.co.za>",
+    to: ["info@hlela.co.za", "capitalvest@gmail.com"],
+    subject: `New Event Brief: ${brief.event_type} — ${brief.contact_name}${brief.company ? ` (${brief.company})` : ""}`,
+    html: `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; color: #1a1a1a;">
+        <div style="background: #0d9488; padding: 24px 32px; border-radius: 12px 12px 0 0;">
+          <h1 style="color: white; margin: 0; font-size: 20px;">New Event Brief</h1>
+          <p style="color: rgba(255,255,255,0.8); margin: 4px 0 0; font-size: 14px;">Reference: ${brief.reference}</p>
+        </div>
+
+        <div style="border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px; padding: 32px;">
+          <h2 style="font-size: 16px; color: #0d9488; margin: 0 0 16px;">Contact</h2>
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+            <tr><td style="padding: 6px 0; color: #6b7280; width: 140px;">Name</td><td style="padding: 6px 0; font-weight: 500;">${brief.contact_name}</td></tr>
+            ${brief.company ? `<tr><td style="padding: 6px 0; color: #6b7280;">Company</td><td style="padding: 6px 0;">${brief.company}</td></tr>` : ""}
+            <tr><td style="padding: 6px 0; color: #6b7280;">Email</td><td style="padding: 6px 0;"><a href="mailto:${brief.contact_email}" style="color: #0d9488;">${brief.contact_email}</a></td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Phone</td><td style="padding: 6px 0;"><a href="tel:${brief.contact_phone}" style="color: #0d9488;">${brief.contact_phone}</a></td></tr>
+          </table>
+
+          <h2 style="font-size: 16px; color: #0d9488; margin: 0 0 16px;">Event Details</h2>
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+            <tr><td style="padding: 6px 0; color: #6b7280; width: 140px;">Type</td><td style="padding: 6px 0; font-weight: 500;">${brief.event_type}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Date</td><td style="padding: 6px 0;">${brief.event_date}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Guests</td><td style="padding: 6px 0;">${brief.guest_range}</td></tr>
+            <tr><td style="padding: 6px 0; color: #6b7280;">Venue</td><td style="padding: 6px 0;">${brief.venue}</td></tr>
+            ${brief.budget_range ? `<tr><td style="padding: 6px 0; color: #6b7280;">Budget</td><td style="padding: 6px 0;">${brief.budget_range}</td></tr>` : ""}
+          </table>
+
+          <h2 style="font-size: 16px; color: #0d9488; margin: 0 0 12px;">Equipment Needed</h2>
+          <p style="margin: 0 0 24px; padding: 16px; background: #f0fdfa; border-radius: 8px; font-size: 14px; color: #0d9488; font-weight: 500;">${equipmentList}</p>
+
+          ${brief.additional_notes ? `
+            <h2 style="font-size: 16px; color: #0d9488; margin: 0 0 12px;">Additional Notes</h2>
+            <p style="margin: 0; padding: 16px; background: #f9fafb; border-radius: 8px; font-size: 14px; line-height: 1.6;">${brief.additional_notes}</p>
+          ` : ""}
+        </div>
+
+        <p style="text-align: center; color: #9ca3af; font-size: 12px; margin-top: 24px;">
+          Hlela — South Africa's first event hire marketplace<br>
+          www.hlela.co.za
+        </p>
+      </div>
+    `,
+  });
+  return { data, error };
+}
+
 interface ContactMessage {
   name: string;
   email: string;

@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 const STATS = [
   { value: "52+", label: "Verified Suppliers" },
   { value: "9", label: "Equipment Categories" },
-  { value: "Cape Town", label: "Launch City" },
-  { value: "R0", label: "To Browse & Compare" },
+  { value: "24hrs", label: "Quote Turnaround" },
+  { value: "R0", label: "To Browse & Submit" },
 ];
 
 export function Stats() {

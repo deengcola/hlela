@@ -1,18 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Search } from "lucide-react";
 import { motion } from "framer-motion";
+import { ArrowRight, FileText } from "lucide-react";
 
 export function Hero() {
-  const [query, setQuery] = useState("");
   const router = useRouter();
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    router.push(`/search${query ? `?q=${encodeURIComponent(query)}` : ""}`);
-  };
 
   return (
     <section className="relative overflow-hidden">
@@ -25,52 +18,49 @@ export function Hero() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center"
         >
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-8">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
+            Cape Town&apos;s first event hire marketplace
+          </div>
+
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1]">
-            Event hire,{" "}
+            Plan your event.{" "}
             <span className="text-accent font-[family-name:var(--font-instrument)] italic">
-              simplified
-            </span>
+              Find everything.
+            </span>{" "}
+            Book in minutes.
           </h1>
 
           <p className="mt-6 text-lg sm:text-xl text-muted max-w-2xl mx-auto leading-relaxed">
-            Stop chasing quotes. Compare Cape Town&apos;s top event hire
-            companies — pricing, reviews, availability — in one place.
+            Submit your event brief and receive quotes from Cape Town&apos;s top
+            hire suppliers within 24 hours. Marquees, furniture, barricades,
+            lighting, generators — all in one place.
           </p>
 
-          <form onSubmit={handleSearch} className="mt-10 max-w-xl mx-auto">
-            <div className="relative">
-              <Search
-                size={20}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-muted"
-              />
-              <input
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search marquees, furniture, decor, lighting..."
-                className="w-full pl-12 pr-32 py-4 rounded-2xl border border-border bg-card text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all shadow-sm"
-              />
-              <button
-                type="submit"
-                className="absolute right-2 top-1/2 -translate-y-1/2 px-6 py-2.5 bg-accent text-white rounded-xl font-medium hover:bg-accent-dark transition-colors text-sm cursor-pointer"
-              >
-                Search
-              </button>
-            </div>
-          </form>
-
-          <div className="mt-6 flex items-center justify-center gap-4 text-sm text-muted">
-            <span>Popular:</span>
-            {["Marquees", "Furniture", "Generators", "Decor"].map((term) => (
-              <button
-                key={term}
-                onClick={() => router.push(`/search?q=${term}`)}
-                className="text-accent hover:text-accent-dark transition-colors cursor-pointer"
-              >
-                {term}
-              </button>
-            ))}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => {
+                document
+                  .getElementById("event-brief")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-xl font-semibold hover:bg-accent-dark transition-colors text-base shadow-lg shadow-accent/20 cursor-pointer"
+            >
+              <FileText size={18} />
+              Submit Your Event Brief
+            </button>
+            <button
+              onClick={() => router.push("/search")}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold border border-border text-foreground hover:border-accent hover:text-accent transition-colors text-base cursor-pointer"
+            >
+              Browse Suppliers
+              <ArrowRight size={18} />
+            </button>
           </div>
+
+          <p className="mt-6 text-sm text-muted">
+            Free to use &middot; No obligation &middot; Response within 24 hours
+          </p>
         </motion.div>
       </div>
     </section>

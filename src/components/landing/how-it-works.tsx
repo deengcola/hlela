@@ -1,26 +1,29 @@
 "use client";
 
-import { Search, GitCompareArrows, CalendarCheck } from "lucide-react";
+import { FileText, Users, CalendarCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
 const STEPS = [
   {
-    icon: Search,
-    title: "Search",
+    icon: FileText,
+    step: "01",
+    title: "Submit your brief",
     description:
-      "Browse Cape Town's top event hire companies by category, location, or equipment type.",
+      "Tell us your event date, size, venue, and what you need. Takes 3 minutes. No account required.",
   },
   {
-    icon: GitCompareArrows,
-    title: "Compare",
+    icon: Users,
+    step: "02",
+    title: "We match you to suppliers",
     description:
-      "See transparent pricing, read verified reviews, and compare suppliers side by side.",
+      "Within 24 hours, we send your brief to the best-matched Cape Town suppliers and collect their quotes for you.",
   },
   {
     icon: CalendarCheck,
-    title: "Book",
+    step: "03",
+    title: "Compare and confirm",
     description:
-      "Request a booking with a structured form. No WhatsApp chaos. Get a response in hours, not days.",
+      "Review quotes side by side. Ask questions. Confirm your bookings — all through one platform, no WhatsApp chaos.",
   },
 ];
 
@@ -39,7 +42,7 @@ export function HowItWorks() {
             How it works
           </h2>
           <p className="mt-4 text-muted text-lg max-w-lg mx-auto">
-            From search to booking in minutes, not days.
+            From brief to booked in under 24 hours.
           </p>
         </motion.div>
 
@@ -51,15 +54,23 @@ export function HowItWorks() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
-              className="text-center"
+              className="relative"
             >
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 text-accent mb-6">
-                <step.icon size={28} />
+              {i < STEPS.length - 1 && (
+                <div className="hidden md:block absolute top-7 left-[calc(50%+2rem)] w-[calc(100%-4rem)] h-px bg-border" />
+              )}
+              <div className="text-center">
+                <div className="relative inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 text-accent mb-6">
+                  <step.icon size={26} />
+                  <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-accent text-white text-[10px] font-bold flex items-center justify-center">
+                    {step.step}
+                  </span>
+                </div>
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  {step.title}
+                </h3>
+                <p className="text-muted leading-relaxed">{step.description}</p>
               </div>
-              <h3 className="text-xl font-semibold text-foreground mb-3">
-                {step.title}
-              </h3>
-              <p className="text-muted leading-relaxed">{step.description}</p>
             </motion.div>
           ))}
         </div>
