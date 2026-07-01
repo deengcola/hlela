@@ -18,6 +18,11 @@ export interface Supplier {
   pricing_visible: boolean;
   featured: boolean;
   created_at: string;
+  subscription_active?: boolean;
+  cover_banner_url?: string;
+  bio?: string;
+  instagram_url?: string;
+  facebook_url?: string;
 }
 
 export interface SupplierImage {

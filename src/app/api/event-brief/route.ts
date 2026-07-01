@@ -25,6 +25,12 @@ export async function POST(req: NextRequest) {
 
   const reference = `HLE-BRIEF-${Date.now()}`;
 
+  // Silently create/update planner record
+  await supabase.from("planners").upsert(
+    { email: contact_email, full_name: contact_name, phone: contact_phone, company: company || null, last_seen_at: new Date().toISOString() },
+    { onConflict: "email", ignoreDuplicates: false }
+  );
+
   const { error: dbError } = await supabase.from("event_briefs").insert({
     reference,
     contact_name,

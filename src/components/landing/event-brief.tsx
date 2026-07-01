@@ -66,6 +66,9 @@ export function EventBrief() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordSaved, setPasswordSaved] = useState(false);
+  const [savingPassword, setSavingPassword] = useState(false);
 
   const toggleEquipment = (item: string) => {
     setForm((prev) => ({
@@ -100,6 +103,18 @@ export function EventBrief() {
     }
   };
 
+  const handleSavePassword = async () => {
+    if (password.length < 6) return;
+    setSavingPassword(true);
+    await fetch("/api/planner/activate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: form.contact_email, password }),
+    });
+    setSavingPassword(false);
+    setPasswordSaved(true);
+  };
+
   if (submitted) {
     return (
       <section id="event-brief" className="py-20 sm:py-28 bg-card">
@@ -108,7 +123,7 @@ export function EventBrief() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.4 }}
-            className="bg-background rounded-3xl border border-border p-12"
+            className="bg-background rounded-3xl border border-border p-10"
           >
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/10 text-accent mb-6">
               <CheckCircle size={32} />
@@ -117,12 +132,51 @@ export function EventBrief() {
               Brief received!
             </h3>
             <p className="text-muted leading-relaxed mb-2">
-              We&apos;ve got your event details. We&apos;ll be in touch within 24 hours with
-              matched quotes from Cape Town&apos;s top suppliers.
+              We&apos;ll be in touch within 24 hours with matched quotes from Cape Town&apos;s top suppliers.
             </p>
-            <p className="text-sm text-muted">
-              Keep an eye on <strong>{form.contact_email}</strong>
+            <p className="text-sm text-muted mb-8">
+              Check <strong>{form.contact_email}</strong>
             </p>
+
+            {/* Silent account activation */}
+            {!passwordSaved ? (
+              <div className="border-t border-border pt-8">
+                <p className="text-sm font-semibold text-foreground mb-1">
+                  Save your event history
+                </p>
+                <p className="text-sm text-muted mb-4">
+                  We&apos;ve created a free Hlela account for you. Set a password to track your quotes and manage future events.
+                </p>
+                <div className="flex gap-3">
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Choose a password (min 6 chars)"
+                    className="flex-1 px-4 py-3 rounded-xl border border-border bg-card text-foreground placeholder:text-muted/50 focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all text-sm"
+                  />
+                  <button
+                    onClick={handleSavePassword}
+                    disabled={password.length < 6 || savingPassword}
+                    className="px-5 py-3 bg-accent text-white rounded-xl font-medium text-sm hover:bg-accent-dark transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer whitespace-nowrap"
+                  >
+                    {savingPassword ? "Saving..." : "Activate"}
+                  </button>
+                </div>
+                <button
+                  onClick={() => setPasswordSaved(true)}
+                  className="mt-3 text-xs text-muted hover:text-foreground transition-colors cursor-pointer"
+                >
+                  Skip for now
+                </button>
+              </div>
+            ) : (
+              <div className="border-t border-border pt-8">
+                <p className="text-sm text-accent font-medium">
+                  ✓ Account activated — we&apos;ll recognise you next time you visit.
+                </p>
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
