@@ -50,12 +50,18 @@ export default async function SupplierPage({ params }: PageProps) {
   if (!supplier) notFound();
 
   // Fetch catalogue items from Supabase
-  const { data: catalogue } = await supabase
-    .from("catalogue_items")
-    .select("*")
-    .eq("supplier_slug", slug)
-    .eq("available", true)
-    .order("sort_order", { ascending: true });
+  let catalogue = null;
+  try {
+    const { data } = await supabase
+      .from("catalogue_items")
+      .select("*")
+      .eq("supplier_slug", slug)
+      .eq("available", true)
+      .order("sort_order", { ascending: true });
+    catalogue = data;
+  } catch {
+    catalogue = null;
+  }
 
   const hasSubscription = supplier.subscription_active ?? false;
   const items = catalogue ?? [];

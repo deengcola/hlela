@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
-import bcrypt from "bcryptjs";
+import { createHash, randomBytes } from "crypto";
+
+function hashPassword(password: string): string {
+  const salt = randomBytes(16).toString("hex");
+  const hash = createHash("sha256").update(salt + password).digest("hex");
+  return `${salt}:${hash}`;
+}
 
 export async function POST(req: NextRequest) {
   const { email, password } = await req.json();
@@ -9,7 +15,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid input" }, { status: 400 });
   }
 
-  const password_hash = await bcrypt.hash(password, 10);
+  const password_hash = hashPassword(password);
 
   const { error } = await supabase
     .from("planners")
