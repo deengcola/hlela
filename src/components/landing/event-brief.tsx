@@ -90,6 +90,9 @@ export function EventBrief() {
 
       if (!res.ok) throw new Error("Submission failed");
       setSubmitted(true);
+      setTimeout(() => {
+        document.getElementById("event-brief")?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 100);
     } catch {
       setError("Something went wrong. Please try again or email info@hlela.co.za");
     } finally {
